@@ -26,7 +26,7 @@ $on-laptop:        800px !default;
 	@media screen and (max-width: $device) {
 	  @content;
 	}
-}  
+}
 
 @import 'base';
 @import 'layout';
