@@ -155,6 +155,10 @@ GEM
     jekyll-theme-hacker (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
+    jekyll-theme-leaf (0.1.0)
+      jekyll (~> 3.8)
+      jekyll-feed (~> 0.9)
+      jekyll-seo-tag (~> 2.1)
     jekyll-theme-leap-day (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
@@ -247,7 +251,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.12)
-  minima (~> 2.5)
+  jekyll-theme-leaf
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.1)
