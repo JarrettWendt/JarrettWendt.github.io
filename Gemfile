@@ -9,7 +9,7 @@ source "https://rubygems.org"
 # Happy Jekylling!
 
 # Theme
-gem "solar"
+gem "midnight"
 
 # To upgrade, run `bundle update github-pages`.
 gem "github-pages", group: :jekyll_plugins
