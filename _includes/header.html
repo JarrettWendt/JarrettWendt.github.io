@@ -29,13 +29,19 @@
 						</a>
 					{%- endif -%}
 				{%- endfor -%}
+				<a class="page-link", href="{{ site.resume }}", target="_blank">
+					Resume
+				</a>
 			</div>
 		</nav>
 	{%- endif -%}
 
-
 	<div class="site-icon">
-		<img src="{{ site.iconURL }}" />
+		{% if page.error404 %}
+			<img src="{{ site.404iconURL }}" />
+		{% else %}
+			<img src="{{ site.iconURL }}" />
+		{% endif %}
 	</div>
 
 </header>

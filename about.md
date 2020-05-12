@@ -3,4 +3,6 @@ title: About
 layout: page
 ---
 
-Hey! This is the "Leaf" Jekyll theme created by [Supun Kavinda](https://twitter.com/_SupunKavinda).
+<sub><sub>
+[Leaf Theme](https://github.com/SupunKavinda/jekyll-theme-leaf) by [Supun Kavinda](https://twitter.com/_SupunKavinda).
+</sub></sub>
