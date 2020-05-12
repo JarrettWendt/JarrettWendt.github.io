@@ -1,7 +1,6 @@
 title: Jarrett Wendt
 iconURL: assets/default-icon.png
 404iconURL: assets/404-icon.png
-# theme: jekyll-theme-leaf
 
 # for a clean URL
 permalink: :slug
