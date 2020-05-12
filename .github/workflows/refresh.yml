@@ -1,0 +1,65 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '53 22 * * *' # Runs every day at 3am
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: GitHub Pages action
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        # Set a SSH private key from repository secret value for pushing to the remote branch.
+#         deploy_key: # optional
+        # Set a generated GITHUB_TOKEN for pushing to the remote branch.
+#         github_token: # optional
+        # Set a personal access token for pushing to the remote branch.
+#         personal_token: # optional
+        # Set a target branch for deployment.
+#         publish_branch: # optional, default is gh-pages
+        # Set an input directory for deployment.
+#         publish_dir: # optional, default is public
+        # Set an external repository (owner/repo).
+#         external_repository: # optional
+        # If empty commits should be made to the publication branch
+#         allow_empty_commit: # optional, default is false
+        # If existing files in the publish branch should be not removed before deploying
+        keep_files: false
+        # Keep only the latest commit on a GitHub Pages branch
+#         force_orphan: # optional, default is false
+        # Set Git user.name
+#         user_name: # optional
+        # Set Git user.email
+#         user_email: # optional
+        # Set a custom commit message with a triggered commit hash
+#         commit_message: # optional
+        # Set a custom full commit message without a triggered commit hash
+#         full_commit_message: # optional
+        # Set tag name
+#         tag_name: # optional
+        # Set tag message
+#         tag_message: # optional
+        # Enable the GitHub Pages built-in Jekyll
+#         enable_jekyll: # optional, default is false
+        # An alias for enable_jekyll to disable adding .nojekyll file to master or gh-pages branches
+#         disable_nojekyll: # optional, default is false
+        # Set custom domain
+#         cname: # optional
