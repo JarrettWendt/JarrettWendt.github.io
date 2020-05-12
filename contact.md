@@ -3,8 +3,12 @@ title: Contact
 layout: page
 ---
 
-You can always contact the creator of this theme via [Twitter](https://twitter.com/_SupunKavinda).
+Email me at 
+<a target="_blank" href="mailto: {{ site.social.email }}">
+{{ site.social.email }}
+</a>
 
-If you need help with Jekyll, ask questions on [Jekyll Talk](https://talk.jekyllrb.com/).
-
-(Change this by editing `contact.md` file)
+See what I'm contributing on 
+<a target="_blank" href="https://github.com/{{ site.social.github }}">
+GitHub
+</a>
