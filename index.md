@@ -1,8 +1,9 @@
 ---
+# title: false
 layout: page
 ---
 
-# Here to read my nonsense?
+Here to read my nonsense?
 
 There's not much...
 
