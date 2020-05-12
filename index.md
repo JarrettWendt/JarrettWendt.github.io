@@ -1,4 +1,5 @@
 ---
+title: false
 layout: page
 ---
 
