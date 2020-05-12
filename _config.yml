@@ -1,0 +1,21 @@
+title: Jarrett Wendt
+iconURL: assets/default-icon.png
+404iconURL: assets/404-icon.png
+theme: jekyll-theme-leaf
+
+# for a clean URL
+permalink: :slug
+
+resume: assets/resume.pdf
+
+social:
+  github: JarrettWendt
+  email: wendtjarrett@gmail.com
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
+
+### comments & analytics
+# hyvor_talk_website_id: 14
+# google_analytics: UA-NNNNNNNN-N
