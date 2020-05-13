@@ -9,14 +9,14 @@ $base-line-height: 1.5 !default;
 $theme-color: #29bed8; // originally 48aabb
 $header-color: #0f0f0f;
 
-$spacing-unit:     30px !default;
+$spacing-unit: 30px !default;
 
-$content-width:    850px !default;
+$content-width: 1000px !default;
 $content-color: #272726;
 
 // devices
-$on-mobile:        600px !default;
-$on-laptop:        800px !default;
+$on-mobile: 600px !default;
+$on-laptop: 800px !default;
 
 // mixins
 @mixin relative-font-size($ratio) {
