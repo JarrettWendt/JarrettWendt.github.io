@@ -15,6 +15,7 @@ layout: default
 			<div class="post-list">
 				{%- for post in posts -%}
 					<a class="post-link" href="{{ post.url | relative_url }}">
+						<img src="{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
 						<h3>{{ post.title | escape }}</h3>
 						<p>{{ post.excerpt }}</p>
 						<sub><sub>{{ post.date | date_to_string }} • {{ post.author }}</sub></sub>

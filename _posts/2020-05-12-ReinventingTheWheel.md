@@ -2,11 +2,24 @@
 layout: post
 author: Jarrett Wendt
 title: Reinventing the Wheel
+excerpt: The C++ Standard Template Library is legendary. So why doesn't anyone use it?
+thumb: assets/images/strandbeest.gif
 ---
+
+<figure>
+<img src="{{ page.thumb }}" alt="strandbeest" width="300">
+<figcaption>strandbeest</figcaption>
+</figure>
+
+&nbsp;
 
 The C++ Standard Template Library is legendary. It's like all of those generic containers and algorithms you learned about in undergrad, but fully realized and optimized to the nines. Generic enough to work with almost any data, and useful for just about any application.
 
 So why doesn't anyone use it?
+
+&nbsp;
+
+&nbsp;
 
 I may not have any industry experience myself yet, but from talking with industry professionals, it seems that basically nobody uses stl. Just look at Unreal Engine. They've got `TArray` instead of `std::vector`, `TMap` instead of `std::map`, `FString` instead of `std::string`... all of these accomplish the same thing, and in many respects (such as how you cannot have a `TArray` of `TArrays`) they're not even as capable as their stl equivalents! So why did Epic reinvent the wheel?
 
@@ -27,7 +40,7 @@ However, when the users are those in a certain specialized industry, and heck th
 Following is a table of the byte-sizes of my different containers compared to the stl. This was compiled with MSVC in release mode. Your stl sizes may differ depending on your compiler.
 
 |                      | container | `iterator` |
-|---------------------:|:---------:|:----------:|
+|:--------------------:|:---------:|:----------:|
 | `std::forward_list`  | 8         | 8          |
 | `SList`              | 24        | 8          |
 | `std::vector`        | 24        | 8          |
@@ -87,7 +100,7 @@ Even though my containers don't use allocators, I'm in the same conundrum. I ins
 
 ```c++
 template<Concept::ReserveStrategy OtherReserveStrategy>
-[[nodiscard]] friend bool operator==(const Array& left, const Array<T, OtherReserveStrategy>& right);
+friend bool operator==(const Array& left, const Array<T, OtherReserveStrategy>& right);
 ```
 
 It doesn't stop there though. What about copy and move semantics? Indeed, there's no way to (easily) copy-construct a `std::vector<int, std::allocator<int>>` from a `std::vector<int, MyAllocator<int>>`. Templates to the rescue!
@@ -134,5 +147,10 @@ I do still provide iterator ctors though because you might want to construct the
 ## 3. Not-Invented-Here Syndrome
 We're all guilty of having this at least partially. Some might have it worse than others. I might be one of them. All the examples and reasons I've given above are great and all but if I've got to be honest, this is the real reason I've re-implemented all of these stl containers. Doing it myself has been a fun and rewarding learning experience. I now feel more confident in my usage of C++ and even in the stl containers I've been working so hard to replace.
 
+But there's more to this than just the gratification of doing it yourself. There's a real security in having the source code available to read, modify, and verify accuracy. Sure, whatever implementation of the stl is available to you is likely open source, but it's just as likely _ungodly unreadable_ to the point that it almost doesn't count. Plus if the code is developed in-house, ~~if~~ when problems arise, you can (if you're this type of studio) just wander over to the author's desk for help, which beats putting in a support ticket.
+
 --------------------------------
 
+But does all of the above really warrant "reinventing the wheel"? In my opinion, for the vast majority of use cases, no. The stl was developed as a performant general-use library and they've achieved exactly that. It's got some very strange... C++isms that make it uncomfortable to approach for newcomers, but once you learn the ropes it's not that bad. Whatever benefits you might get from reimplementing the standard library are likely going to be outweighed by the _deep_ time sink of doing so. When you get down to it, time - _human_ work time not _runtime_ - might be the most important factor to consider. A large company who takes on a lot of inexperienced employees might earn back that time spent if their custom library is more programmer friendly and those new hires can learn more easily and become productive quicker.
+
+Then again, I'm pretty inexperienced myself, so forget everything I just said.
