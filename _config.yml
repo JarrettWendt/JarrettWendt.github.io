@@ -2,6 +2,8 @@ title: Jarrett Wendt
 iconURL: assets/default-icon.png
 404iconURL: assets/404-icon.png
 
+markdown: kramdown
+
 # for a clean URL
 permalink: :slug
 
