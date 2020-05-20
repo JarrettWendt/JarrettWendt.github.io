@@ -74,12 +74,20 @@ code {
 	font-family: $code-font-family;
 	font-size: 0.9375em;
 	border-radius: 3px;
-	tab-size: 4;
+
+	-webkit-tab-size: 4 !important;
+	-moz-tab-size: 4 !important;
+	-o-tab-size: 4 !important;
+	tab-size: 4 !important;
 }
 
 code {
 	padding: 1px 5px;
-	tab-size: 4;
+
+	-webkit-tab-size: 4 !important;
+	-moz-tab-size: 4 !important;
+	-o-tab-size: 4 !important;
+	tab-size: 4 !important;
 }
  
  pre {
@@ -88,13 +96,21 @@ code {
 	padding: 20px;
 	background: $header-color;
 	border-radius: 20px;
-	tab-size: 4;
+
+	-webkit-tab-size: 4 !important;
+	-moz-tab-size: 4 !important;
+	-o-tab-size: 4 !important;
+	tab-size: 4 !important;
 
 	> code {
 		border: 0;
 		padding-right: 0;
 		padding-left: 0;
-		tab-size: 4;
+
+		-webkit-tab-size: 4 !important;
+		-moz-tab-size: 4 !important;
+		-o-tab-size: 4 !important;
+		tab-size: 4 !important;
 	}
 }
 
