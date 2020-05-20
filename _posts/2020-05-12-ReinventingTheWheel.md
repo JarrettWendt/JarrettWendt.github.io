@@ -44,21 +44,21 @@ Following is a table of the byte-sizes of my different containers compared to th
 | `std::forward_list`  | 8         | 8          |
 | `SList`              | 24        | 8          |
 | `std::vector`        | 24        | 8          |
-| `Array`              | 24        | 8          |
+| `Array`              | 16        | 8          |
 | `std::unordered_map` | 64        | 8          |
-| `HashMap`            | 32        | 24         |
+| `HashMap`            | 24        | 24         |
 
-So it looks like in most cases, my containers/iterators are 8-24 bytes bigger than the stl's. That doesn't sound like much, but we're talking about the fundamental containers that applications will be built upon. These bytes will add up and could contribute to some serious bloat. Let's see what justifications I have then...
+So it looks like in my types are about the same size or smaller than the stl's, with one exception. It may not seem like much, but we're talking about the fundamental containers that applications will be built upon. These bytes will add up and could contribute to some serious bloat. Let's see what justifications I have then...
 
 Starting with the singly linked list, the standard decided that they'd only maintain a head pointer. I decided a tail pointer would be nice as well as a `size_t` for a count of the number of elements. In this instance, there's not really any choice but to reimplement the container. If you were to be lazy and try to reuse existing code by composing `SList` of a `std::forward_list` you'd have no way to retrieve, store, and the tail pointer since the nodes are not exposed.
 
 The lists' iterators are both the same size, a pointer to a node. An alternative implementation would be to also carry a pointer to the owner list so that you may verify you're performing operations on the correct container when passing the `iterator` into methods on `SList`. I in fact have this enabled in debug, but for release builds I keep the smaller data type.
 
-Now for the contiguous containers. My `Array` and the stl's `std::vector` are the exact same size, maintaining a pointer address, an element count, and a capacity. I believe most stl implementations actually store three pointers: the starting address, the ending address, and the address of the last element. Either way, it adds up to the same size and provides the same functionality.
+Now for the contiguous containers. `std::vector` is 24 bytes because it maintains three pointers: the starting address, the ending address, and the address of the last element. I maintain semantically the same information with a starting address, an element count, and a memory capacity. Originally, the count and capacity were both a `size_t` meaning they would be the same width as pointers and so my `Array` would be the same size as a `std::vector`. However, I _really_ don't forsee anyone putting over 4-billion things into my container, so I made the use-case decision to internally store these integers as `uint32_t`s.
 
 Once again, our iterators are the same size, and only contain a pointer to the address of the element being referenced. My original design called for a pointer to the owning `Array` and an index into that array. This would double the size of the `iterator` but the benefit is bounds checking. I originally had many methods throw exceptions when going out of bounds, and safely capping `operator++` so that it never went beyond the end. I've now traded that functionality for performance. We're still getting _some_ bounds checking. Like `SList::iterator`, in debug mode we still have the owner pointer, so we can assert whenever the iterator is being used wrong. I generally prefer exceptions but it's a bad idea to only throw in debug mode.
 
-Finally, the `HashMap`. Here you can see I have a big advantage over stl at half the size. My HashMap is comprised of only an `Array<SList>` and a `size_t` element count. `std::unordered_map` gets all of its extra bloat by instantiating its `Hash` and `KeyEqual` functors passed in as predicates. My original design for all of these containers in fact relied heavily on storing `std::function`s like these, which resulted in severely bloating the size of these containers since a single `std::function` can be as much as 64 bytes! In my new design, I don't store these at all. I instead assume that `Hash` and `KeyEqual` are both stateless and trivially default constructable so that I may simply instantiate them on the stack as-needed. This is a **use case** decision as I don't see any reason for anyone using my `HashMap` to pass a `Hash` functor with state.
+Finally, the `HashMap`. Here you can see I have a big advantage over stl at over half the size. My HashMap is comprised of only an `Array<SList>` and a `size_t` element count. `std::unordered_map` gets all of its extra bloat by instantiating its `Hash` and `KeyEqual` functors passed in as predicates. My original design for all of these containers in fact relied heavily on storing `std::function`s like these, which resulted in severely bloating the size of these containers since a single `std::function` can be as much as 64 bytes! In my new design, I don't store these at all. I instead assume that `Hash` and `KeyEqual` are both stateless and trivially default constructable so that I may simply instantiate them on the stack as-needed. This is a **use case** decision as I don't see any reason for anyone using my `HashMap` to pass a `Hash` functor with state.
 
 While I believe I have a great advantage in the size of the container itself, the size of the `iterator` here is a severe blow, and I believe very telling of how `std::unordered_map` is implemented. I decided to be lazy and compose my `HashMap::iterator` out of an `SList::iterator`, `Array::iterator`, and an owner pointer. This makes perfect sense since my `HashMap` is nothing but an `Array` of `SList`s, so I need to be able to iterator through the `Array` and then iterate though each `SList`. So how the heck does the stl get away with only 8 bytes when they use an array of singly linked lists too?
 
@@ -70,22 +70,28 @@ As a final note on this topic of "use case", I'd like to mention allocators. All
 The last point was somewhat nitpicky. 8 bytes here and there realistically won't be much of an impact. Sure they can add up, but the thing slowing down your application or bloating your memory is likely to be found elsewhere. A real gripe against the stl, and I believe anyone who's used it in any meaningful capacity can attest to, is how convoluted it can be to use.
 
 `std::vector` provides `push_back` and `pop_back` methods. Great. It's very clear what they do. They append and remove from the end of the container. Cool. Now what if I want to append or remove from the front? Just call `push_front` or `pop_front`? Nope! Those methods don't exist! If you want to insert at the front of the container you must do this:
+
 ```c++
 v.insert(v.begin(), t);
 ```
+
 And if you want to remove from the front of the container you must:
+
 ```c++
 v.erase(v.begin());
 ```
+
 Well that's annoying. To be fair, it's clear why there is no `push_front` or `pop_front` provided for `std::vector`. It's because it would be horribly inefficient. To insert something at the front, all existing elements must be shuffled back one space. Likewise to remove they must all be shuffled forward. By not providing a `push_front` or `pop_front` the C++ standard is actively attempting to curb poor programming practices and instead encourage the use of containers such as `std::deque` which is likely more suited to situations like these.
 
 That's great and all for the n00bs who don't know what they're doing, but what about those of us who _insist_ we know what we're doing? Many times I've decided a `std::vector` would be the right container for an application because of that sweet sweet O(1) random access, but we _sometimes_ need to insert/remove from the front? I wanna be able to call `push_front` and `pop_front` gosh darnit!
 
 What if you want to remove all elements matching a certain predicate? C# conveniently provides `List<T>.RemoveAll(Predicate<T>)`, so C++ probably has something similar, right? No? Enter the erase-remove idiom:
+
 ```c++
 const auto it = std::remove(v.begin(), v.end(), t);
 v.erase(it, v.end());
 ```
+
 Now _that_ is ugly. And what the heck? You're calling some generic free function `std::remove` to do it? Which returns an iterator?
 
 This highlights my personal biggest gripe with the stl. C++ is a language of patterns. It is in fact more focused on these patterns than Object Orientation, which can seem completely bizarre to programmers coming from C# or Java. What is undoubtedly the king of these patterns is the iterator pattern. Iterators are extremely powerful, and it's thanks to them that generic methods such as `std::remove` can work on almost any object. So from the perspective of code reuse, free functions like `std::remove` are beautiful. There doesn't have to be a separate `remove` method on every container now. That rocks, but it doesn't make it any easier to use.
