@@ -13,14 +13,11 @@ cwd: '../'
 	<div class="box home-box">
 		<div class="post-list">
 			<div class="post-category">
-			{% markdown %}
-# {{ page.title }}
+				<h1>{{ page.title }}</h1>
+				This blog series is about my journey creating a custom game engine from nothing. I'll be drawing inspiration from the two most popular game engines freely available: Unity and Unreal. For this project, I'll be using the latest versions of C++ and Visual Studio with a target platform of Windows x64.
+				<br/><br/>
 
-This blog series is about my journey creating a custom game engine from nothing. I'll be drawing inspiration from the two most popular game engines freely available: Unity and Unreal. For this project, I'll be using the latest versions of C++ and Visual Studio with a target platform of Windows x64.
-
-The primary focus of this project is to design the logical layout of data and control flow within the engine. This is the foundation that needs to be established before things like physics and rendering can be added. So I'll be covering things like data memory management, data structures, serialization, events, threading, and scripting language integration.
-
-			{% endmarkdown %}
+				The primary focus of this project is to design the logical layout of data and control flow within the engine. This is the foundation that needs to be established before things like physics and rendering can be added. So I'll be covering things like data memory management, data structures, serialization, events, threading, and scripting language integration.
 			</div>
 
 			{% assign posts = site.posts | sort: 'date' %}
