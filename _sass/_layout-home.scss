@@ -17,4 +17,16 @@
 			margin:0;
 		}
 	}
+	.post-category {
+		color: inherit;
+		display:block;
+		padding: $spacing-unit;
+		transition: .3s background-color;
+		&:not(:last-child) {
+			border-bottom:1px solid $header-color;
+		}
+		h3 {
+			margin:0;
+		}
+	}
 }
