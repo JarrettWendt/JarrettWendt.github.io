@@ -3,7 +3,7 @@
 layout: page
 ---
 
-Nerd who likes to spend his free time optimizing their old code.
+Nerd who likes to spend his free time optimizing his old code.
 
 I graduated from the University of Central Florida in Spring 2019 with a B.S. in Computer Science and went on to the Florida Interactive Entertainment Academy, from which I will graduate in Fall 2020 with an M.S. in Interactive Entertainment.
 

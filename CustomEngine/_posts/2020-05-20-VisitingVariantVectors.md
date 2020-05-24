@@ -2,6 +2,7 @@
 layout: post
 author: Jarrett Wendt
 title: Visiting Variant Vectors
+category: customEngine
 ---
 
 The title isn't 100% accurate but I liked the alliteration. We'll actually be visiting `Array`s instead of `std::vector`s. See my last post for more on my `Array` type.

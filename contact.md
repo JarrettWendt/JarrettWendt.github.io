@@ -1,6 +1,7 @@
 ---
 title: Contact
 layout: page
+category: top
 ---
 
 Email me at 
