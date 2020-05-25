@@ -9,7 +9,7 @@ category: customEngine
 > Insert blerb about how all programs need to be multithreaded now, the slowdown of Moore's Law, all the cores on Ryzen CPUs, etc.
 
 Unity provides a really convenient way to add asynchronous logic into your code:
-```C#
+```c#
 using UnityEngine;
 using System.Collections;
 
@@ -29,7 +29,7 @@ public class ExampleClass : MonoBehaviour
 ```
 
 Personally, I prefer to define my coroutines as a local function if they're small and only used once:
-```C#
+```c#
 using UnityEngine;
 using System.Collections;
 
@@ -119,7 +119,7 @@ Coroutines::Start([]()->Coroutine
 Notice that we're explicitly declaring the lambda's return type with `->` (parenthesis are optional in a lambda that takes no parameters, unless you want to explicitly declare the return type). Also notice that we're not explicitly returning a `Time::Seconds`. Instead, we're taking advantage of std::chrono_literals for even cleaner syntax. We could just as easily write `co_yield 500ms` to achieve the same effect.
 
 The above calls to `Start()` are a sort of "set-and-forget" version. But if you want to explicitly stop a coroutine later, you can do this:
-```C++
+```c++
 Coroutines::Start("myCoroutine", []()->Coroutine
 {
 	// On no! This will go on forever!
@@ -323,7 +323,7 @@ What happens if we call `Coroutines::Stop()` from within a coroutine? What happe
 Ladies and gentleman, we have a race condition. Well, sort of. It's race-condition-esque. It brings up feelings of race conditions. But it's not a real race condition because we're dealing with synchronous code. Luckily, that means we won't need locks to solve this problem (in fact, if we tried to use them we'd deadlock immediately). Race-condition-esque problems like this come up often with coroutines, since we _are_ dealing with asynchronous code (we can't be sure _exactly_ when it's going to be executed), but they're executed entirely synchronously.
 
 The solution to this is to defer modifications of the HashMap to one point in time. We will do this with a _pending list_.
-```C++
+```c++
 struct PendingOp final
 {
 	enum class Type : uint8_t
