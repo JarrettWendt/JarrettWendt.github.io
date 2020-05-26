@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: customEngine
 author: Jarrett Wendt
 title: Reimplementing Unity Coroutines in C++
 excerpt: Insert blerb about how all programs need to be multithreaded now, the slowdown of Moore's Law, all the cores on Ryzen CPUs, etc.
@@ -172,7 +172,7 @@ So your return type, whatever that may be, must have a `::promise_type` sub-type
 - `initial_suspend()`: can return either `suspend_always` or `suspend_never`. This defines the behavior of your coroutine when it is first called. Does it pause immediately or does it continue until the first `co_` statement?
 - `yield_value()` or `yield_void()`: this is called whenever you `co_yield`.
 - `return_value()` or `return_void()`: this is called whenever you `co_return`.
-- `unhandled_exception()`: this is called whenever an exception is thrown. You can retrieve the exception by calling `std::current_exception()`.
+- `unhandled_exception()`: this is called whenever an exception is thrown. You can retrieve the exception by calling `std::current_exception()`. If you want to deal with exceptions at all in your coroutine, they _must_ be handled here. The exception will not be percolated up the call stack to whatever's resuming the coroutine.
 - `final_suspend()`: can return either `suspend_always` or `suspend_never`. This is called whenever your function ends, whether that be from an exception or `co_return`. Like `initial_suspend`, it can further define the behavior of our coroutine. Such as if we want to start the function all over again or be done with it.
 
 Let's start from the beginning. My `get_return_object()` looks like this:
@@ -531,10 +531,10 @@ for (const auto& [key, pair] : asyncCoroutines)
 
 Something that might be convenient about this is that there's only ever one call to `std::async` for every `Coroutine`. Meaning each `Coroutine` is guaranteed to always run on the same thread. That might be useful if some user-code relies on checking the state of the current thread.
 
-There's problems with going this route though. For one, we're introducing countless potential race conditions. Since before async coroutines were limited to only being called within `Update()`, there might have been some safety assurances about when they're being invoked. Now nothing is safe. What if the user attempts to manipulate the state of the engine while the engine is in the middle of rendering something? Or doing a physics calculation? There's too many aspects of a game engine to make it completely thread safe and doing so would result in a lot of unwanted overhead.
+There's problems with going this route though. For one, we're introducing countless potential race conditions. Before, async coroutines were limited to only being called within `Update()`, so you could make some safety assurances about the state of the engine. Now nothing is safe. What if the coroutine does something unwanted while the engine happens to be in the middle of a render? Or doing a physics calculation? There's too many aspects of a game engine to make it completely thread safe and doing so would result in a lot of unwanted overhead.
 
-An alternative might simply be to just let the user call `std::async` themselves. The C++ standard library's threading multithreading constructs are some of the most powerful and expressive I've seen in any language. It might not be that much of a burden on the user to tell them to "do it themselves".
+Another problem with this implementation of true asynchronousness is performance. For simplicity's sake, I've used a single `while` loop that just repeatedly checks of the coroutine can `Resume` and whether it is finished. The problem with this is that, when the `Coroutine` isn't doing anything, this creates a busy-wait. The thread will waste precious cycles looping and not doing anything. We could fix this with a simple call to `std::this_thread::sleep_for()`. A more comprehensive solution would be to involve thread pooling.
 
-A good middle ground might be to introduce some sort of `SelfDestructingThread` type. I've had some ideas on how to implement this for a while but haven't perfected it yet. Basically, you spawn a thread and just let it run and when it's done it destroys itself and all memory associated with it. The main problem with it is I can't decide if there should or shouldn't be a way to get a handle to it or not. Having a handle would be useful if you want to kill the thread early, but it would also partially defeat the purpose of it being "self-destructing".
+An idea worth mentioning is a sort of `SelfDestructingThread` type. I've had some ideas on how to implement this for a while but haven't perfected it yet. Basically, you spawn a thread and just let it run and when it's done it destroys itself and all memory associated with it. The main problem with it is I can't decide if there should or shouldn't be a way to get a handle to it or not. Having a handle would be useful if you want to kill the thread early, but it would also partially defeat the purpose of it being "self-destructing".
 
 <sub><sub> Credit goes to <a href="https://blog.panicsoftware.com/your-first-coroutine/" target="_blank">panicsoftware's tutorial</a> which really helped me with understanding C++20's coroutines </sub></sub>

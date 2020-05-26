@@ -8,6 +8,7 @@ markdown: kramdown
 permalink: :slug
 
 resume: assets/resume.pdf
+repo: https://github.com/JarrettWendt/FIEAEngine
 
 social:
   github: JarrettWendt
