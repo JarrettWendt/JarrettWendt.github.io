@@ -3,6 +3,7 @@ layout: default
 title: Making a Game Engine from Scratch
 excerpt: No, not <i>that</i> Scratch...
 author: Jarrett Wendt
+year: 2020
 cwd: '../'
 ---
 
