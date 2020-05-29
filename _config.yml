@@ -18,6 +18,18 @@ plugins:
  - jekyll-feed
  - jekyll-seo-tag
 
+collections_dir: collections
+collections:
+  projects:
+    output: true
+  custom_engine:
+    output: true
+
+header_pages:
+  - pages/projects.md
+  - pages/blog.md
+  - pages/contact.md
+
 ### comments & analytics
 # hyvor_talk_website_id: 14
 # google_analytics: UA-NNNNNNNN-N

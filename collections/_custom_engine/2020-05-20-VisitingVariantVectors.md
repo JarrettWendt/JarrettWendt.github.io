@@ -1,8 +1,10 @@
 ---
-layout: customEngine
-author: Jarrett Wendt
 title: Visiting Variant Vectors
+author: Jarrett Wendt
+sourceRepo: https://github.com/JarrettWendt/FIEAEngine
 category: customEngine
+layout: post
+cwd: '../'
 ---
 
 The title isn't 100% accurate but I liked the alliteration. We'll actually be visiting `Array`s instead of `std::vector`s. See my last post for more on my `Array` type.

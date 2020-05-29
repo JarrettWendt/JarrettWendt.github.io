@@ -1,14 +1,16 @@
 ---
-layout: customEngine
-author: Jarrett Wendt
 title: Reinventing the Wheel
+author: Jarrett Wendt
 excerpt: The C++ Standard Template Library is legendary. So why doesn't anyone use it?
 thumb: assets/images/strandbeest.gif
+sourceRepo: https://github.com/JarrettWendt/FIEAEngine
 category: customEngine
+layout: post
+cwd: '../'
 ---
 
-<figure>
-<img src="{{ page.thumb }}" alt="strandbeest" width="300">
+<figure style="float: right;">
+<img src="{{ page.cwd }}{{ page.thumb }}" alt="strandbeest" width="300">
 <figcaption>strandbeest</figcaption>
 </figure>
 

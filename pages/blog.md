@@ -2,6 +2,7 @@
 title: Blog
 layout: default
 category: top
+cwd: '../'
 ---
 
 <div class="home">

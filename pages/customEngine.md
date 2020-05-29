@@ -20,16 +20,14 @@ cwd: '../'
 				The primary focus of this project is to design the logical layout of data and control flow within the engine. This is the foundation that must be established before more obvious components of a game engine like physics and rendering can be added. So I'll be covering things like memory management, data structures, serialization, events, threading, and scripting language integration.
 			</div>
 
-			{% assign posts = site.posts | sort: 'date' %}
+			{% assign posts = site.custom_engine | sort: 'date' %}
 			{%- for post in posts -%}
-				{% if post.category == "customEngine" %}
-					<a class="post-link" href="{{ post.url | relative_url }}">
-						<img src="../{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
-						<h3>{{ post.title | escape }}</h3>
-						<p>{{ post.excerpt }}</p>
-						<sub><sub>{{ post.date | date_to_string }} • {{ post.author }}</sub></sub>
-					</a>
-				{% endif %}
+				<a class="post-link" href="{{ post.url | relative_url }}">
+					<img src="../{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
+					<h3>{{ post.title | escape }}</h3>
+					<p>{{ post.excerpt }}</p>
+					<sub><sub>{{ post.date | date_to_string }} • {{ post.author }}</sub></sub>
+				</a>
 			{%- endfor -%}
 		</div>
 	</div>
