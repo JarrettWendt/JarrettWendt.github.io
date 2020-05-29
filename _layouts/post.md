@@ -9,7 +9,17 @@ layout: default
 	</header>
 
 	<div class="post-content e-content" itemprop="articleBody">
+		{% if page.sourceRepo %}
+			You can find all the source code in this article on my <a href="{{ page.sourceRepo }}" target="_blank">repo</a>.
+		{% endif %}
+
+		<br/><br/>
+
 		{{ content }}
+
+		{% if page.sourceRepo %}
+			<sub>You can find all the source code in this article on my <a href="{{ page.sourceRepo }}" target="_blank">repo</a>.</sub>
+		{% endif %}
 	</div>
 
 	<p class="post-meta">

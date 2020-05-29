@@ -1,9 +1,11 @@
 ---
-layout: customEngine
-author: Jarrett Wendt
 title: Reimplementing Unity Coroutines in C++
+author: Jarrett Wendt
 excerpt: Insert blerb about how all programs need to be multithreaded now, the slowdown of Moore's Law, all the cores on Ryzen CPUs, etc.
+sourceRepo: https://github.com/JarrettWendt/FIEAEngine
 category: customEngine
+layout: post
+cwd: '../'
 ---
 
 > Insert blerb about how all programs need to be multithreaded now, the slowdown of Moore's Law, all the cores on Ryzen CPUs, etc.

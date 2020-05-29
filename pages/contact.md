@@ -2,6 +2,7 @@
 title: Contact
 layout: page
 category: top
+cwd: '../'
 ---
 
 Email me at 
