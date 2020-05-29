@@ -23,7 +23,7 @@ cwd: '../'
 					<img src="{{ post.cwd }}{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
 					<h3>{{ post.title | escape }}</h3>
 					<p>{{ post.excerpt }}</p>
-					<sub><sub>2020 • Jarrett Wendt</sub></sub>
+					<sub><sub>{{ post.date | date_to_string }} • Jarrett Wendt</sub></sub>
 				</a>
 			{% endfor %}
 
