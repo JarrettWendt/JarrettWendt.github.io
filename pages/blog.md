@@ -18,6 +18,15 @@ cwd: '../'
 				<sub><sub>2020 • Jarrett Wendt</sub></sub>
 			</a>
 
+			{% for post in site.misc_blog %}
+				<a class="post-link" href="{{ post.url | relative_url }}">
+					<img src="{{ post.cwd }}{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
+					<h3>{{ post.title | escape }}</h3>
+					<p>{{ post.excerpt }}</p>
+					<sub><sub>2020 • Jarrett Wendt</sub></sub>
+				</a>
+			{% endfor %}
+
 		</div>
 	</div>
 </div>

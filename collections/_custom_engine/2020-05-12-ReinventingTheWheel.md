@@ -4,7 +4,6 @@ author: Jarrett Wendt
 excerpt: The C++ Standard Template Library is legendary. So why doesn't anyone use it?
 thumb: assets/images/strandbeest.gif
 sourceRepo: https://github.com/JarrettWendt/FIEAEngine
-category: customEngine
 layout: post
 cwd: '../'
 ---

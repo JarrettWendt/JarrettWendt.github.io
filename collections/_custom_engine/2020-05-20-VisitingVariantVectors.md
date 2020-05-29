@@ -2,7 +2,6 @@
 title: Visiting Variant Vectors
 author: Jarrett Wendt
 sourceRepo: https://github.com/JarrettWendt/FIEAEngine
-category: customEngine
 layout: post
 cwd: '../'
 ---

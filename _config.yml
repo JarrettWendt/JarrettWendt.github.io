@@ -4,6 +4,8 @@ iconURL: assets/default-icon.png
 
 markdown: kramdown
 
+future: true
+
 # for a clean URL
 permalink: :slug
 
@@ -23,6 +25,8 @@ collections:
   projects:
     output: true
   custom_engine:
+    output: true
+  misc_blog:
     output: true
 
 header_pages:
