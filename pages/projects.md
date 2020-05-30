@@ -19,7 +19,9 @@ cwd: '../'
 			{% assign posts = site.pages | where: 'title', 'Making a Game Engine from Scratch' | concat: site.projects | sort: 'date' %}
 			{%- for post in posts -%}
 				<a class="post-link" href="{{ post.url | relative_url }}">
-					<img src="../{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
+					{% if post.thumb %}
+						<img src="../{{ post.thumb }}" alt="{{ post.thumb }}" height="100" style="float: right; vertical-align: top;">
+					{% endif %}
 					<h3>{{ post.title | escape }}</h3>
 					<p>{{ post.excerpt }}</p>
 					<sub><sub>
