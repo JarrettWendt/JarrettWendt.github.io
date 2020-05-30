@@ -1,7 +1,7 @@
 ---
 title: Macros Are Your Friend
 author: Jarrett Wendt
-excerpt: Don't shun it like that person you didn't invite to the party.
+excerpt: Don't shun the preprocessor like a stranger you didn't invite to the party.
 thumb: assets/images/WarGamesTicTacToe.gif
 sourceRepo: https://github.com/JarrettWendt/FIEAEngine
 layout: post

@@ -1,12 +1,14 @@
 ---
 title: Visiting Variant Vectors
 author: Jarrett Wendt
+excerpt: The title isn't 100% accurate but I liked the alliteration.
 sourceRepo: https://github.com/JarrettWendt/FIEAEngine
 layout: post
 cwd: '../'
 ---
+{% assign reinventingTheWheel = site.custom_engine | where: 'title', 'Reinventing the Wheel' | first %}
 
-The title isn't 100% accurate but I liked the alliteration. We'll actually be visiting `Array`s instead of `std::vector`s. See my last post for more on my `Array` type.
+The title isn't 100% accurate but I liked the alliteration. We'll actually be visiting `Array`s instead of `std::vector`s. See my <a href="{{ reinventingTheWheel.url }}" target="_blank">last post</a> for more on my `Array` type.
 
 Every game engine has some sort of a Variant type. Unreal has [FVariant](https://docs.unrealengine.com/en-US/API/Runtime/Core/Misc/FVariant/index.html), Godot has their own [Variant](https://docs.godotengine.org/en/stable/development/cpp/variant_class.html), in Unity you have the option to use C#'s `dynamic` type.
 
