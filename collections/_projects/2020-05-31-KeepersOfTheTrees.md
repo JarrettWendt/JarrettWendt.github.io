@@ -20,6 +20,35 @@ On this project, I was our tools programmer. I designed and implemented various 
 
 I did also implement some gameplay features of our project, mainly the plant which the team and faculty agree is the most interesting of them all: The beanstalk.
 
+### Beanstalk
+
+<video width="100%" muted autoplay loop>
+<source src="{{ imgDir }}Beanstalk.mp4" type="video/mp4"/>
+</video>
+
+The beanstalk in our game serves the same purpose as ladders and ziplines in most games: it's a more interesting way of getting around than just walking. The way it works is the player picks up a beanstalk seed. They then plant it somewhere and it grows towards the nearest light source. Through the Keeper's magical abilities, the player can grow and degrow the beanstalk at will.
+
+When originally tasked with creating the beanstalk, I was worried it might require pathfinding. Such as if the light source the beanstalk needs to grow towards is behind and obstacle. I have implemented the A<sup>*</sup> pathfinding algorithm in Unity2D before and was concerned about the kind of performance we might expect from a 3D one in an open environment. I was assured by my level designers that this wouldn't be a problem since there should always be line-of-sight between the initial growth point and the destination light.
+
+To achieve the desired functionality, the beanstalk could easily just grow in a straight line towards the destination. However this would have been unacceptable aesthetically. Beanstalks don't just grow in straight lines. They curve and bend at their own whim. The majority of the implementation details are to accommodate this aesthetic.
+
+Under the hood, the beanstalk is nothing but a spline. Splines are very frequently used in the Unreal Editor and our tech artists are more than capable of scripting them through blueprints. But dynamically creating one at runtime is a different thing entirely and best done in C++.
+
+When the beanstalk initially grows, it does so in an arc. This is to give it an initial upward direction and then a smooth turn towards the destination. This required a bit of 3D math since I had to create a formula for a point along an ellipse on a plane in 3D space:
+
+$$
+\begin{align}
+& P(t) = c + a \ v_1 \cos(t) + b \ v_2 \sin(t)						\\
+& \text{where:}														\\
+& v_1 \text{ and } v_2 \text{ are orthogonal and define a plane}	\\
+& c \text{ is the center of the ellipse}							\\
+& a \text{ is the half-width of the ellipse}						\\
+& b \text{ is the half-height of the ellipse}
+\end{align}
+$$
+
+Once the arc is done, the beanstalk again _could_ grow in a straight line towards the destination. This still wasn't very aesthetically pleasing. So I introduced some random variation to give the beanstalk a bit of a mind of its own. The randomization parameters as well as the parameters for the arc phase are all completely customizable in-editor for the level designers.
+
 ## Tools
 
 For all of my analytics capturing plugins, I save data off to a .csv file. Unreal has its own built-in analytics tools, but they save to .json files. My level designers who would actually be using this data expressed that they would love to be able to easily open the data into Excel, and .json files wouldn't be very amenable to that. Thusly, I rolled my own solution and manually captured, stored, and wrote all the data to .csv files myself.

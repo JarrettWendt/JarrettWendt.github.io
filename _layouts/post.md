@@ -2,6 +2,9 @@
 layout: default
 ---
 
+<!-- MathJax JavaScript LaTeX library -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
 	<header class="post-header">
