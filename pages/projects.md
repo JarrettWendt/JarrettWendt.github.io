@@ -16,7 +16,8 @@ cwd: '../'
 				A brief collection of some of my favorite projects I've worked on.
 			</div>			
 
-			{% assign posts = site.pages | where: 'title', 'Making a Game Engine from Scratch' | concat: site.projects | sort: 'date' %}
+			{% assign sortedProjects = site.projects | sort: 'date' | reverse %}
+			{% assign posts = site.pages | where: 'title', 'Making a Game Engine from Scratch' | concat: sortedProjects %}
 			{%- for post in posts -%}
 				<a class="post-link" href="{{ post.url | relative_url }}">
 					{% if post.thumb %}
