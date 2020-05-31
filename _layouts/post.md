@@ -11,9 +11,8 @@ layout: default
 	<div class="post-content e-content" itemprop="articleBody">
 		{% if page.sourceRepo %}
 			You can find all the source code in this article on my <a href="{{ page.sourceRepo }}" target="_blank">repo</a>.
+			<br/><br/>
 		{% endif %}
-
-		<br/><br/>
 
 		{{ content }}
 
