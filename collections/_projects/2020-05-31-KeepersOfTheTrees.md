@@ -34,7 +34,7 @@ To achieve the desired functionality, the beanstalk could easily just grow in a 
 
 Under the hood, the beanstalk is nothing but a spline. Splines are very frequently used in the Unreal Editor and our tech artists are more than capable of scripting them through blueprints. But dynamically creating one at runtime is a different thing entirely and best done in C++.
 
-When the beanstalk initially grows, it does so in an arc. This is to give it an initial upward direction and then a smooth turn towards the destination. This required a bit of 3D math since I had to create a formula for a point along an ellipse on a plane in 3D space:
+When the beanstalk initially grows, it does so in an arc. This is to give it an initial upward direction and then a smooth turn towards the destination. This required a little bit of 3D math since I had to create parametric equation for a point along an ellipse on a plane in 3D space:
 
 $$
 \begin{align}
@@ -43,7 +43,8 @@ $$
 & v_1 \text{ and } v_2 \text{ are orthogonal and define a plane}	\\
 & c \text{ is the center of the ellipse}							\\
 & a \text{ is the half-width of the ellipse}						\\
-& b \text{ is the half-height of the ellipse}
+& b \text{ is the half-height of the ellipse}						\\
+& t \text{ parametric parameter, in this case time}
 \end{align}
 $$
 
