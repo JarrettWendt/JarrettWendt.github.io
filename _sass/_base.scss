@@ -28,8 +28,8 @@ body {
 	text-align: justify;
 
 	// font
-	font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
-	color:$base-font-color;
+	font: $base-font-weight #{$base-font-size} / #{$base-line-height} $base-font-family;
+	color: $base-font-color;
 	-webkit-text-size-adjust: 100%;
 	-webkit-font-feature-settings: "kern" 1;
 	-moz-font-feature-settings: "kern" 1;
