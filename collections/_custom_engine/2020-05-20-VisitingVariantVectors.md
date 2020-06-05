@@ -20,8 +20,10 @@ The next hint is to recognize that the user isn't actually creating any code tha
 
 The final hint is to recognize that programmers are lazy. We want to avoid as much duplicate code as possible, which means that we don't have separate logic for when the Markup Parser see's an `int` vs a `float` vs a pointer, etc. So all of these types must be getting unified into a single type.
 
-How you'll see this accomplished in most implementations is with a discriminated union:
-```c++
+How you'll see this accomplished in most implementations is with a discriminated `union` paired with an enumeration. The `union` is to store the data while the `enum` is to keep track of which type it is at runtime.
+<div class="row">
+<div class="column" style="flex: 33%">
+{% highlight C++ %}
 union Union
 {
 	bool b,
@@ -30,9 +32,11 @@ union Union
 	std::string s,
 	void* p
 };
-```
-Often paired with an enumeration:
-```c++
+{% endhighlight %}
+</div>
+
+<div class="column" style="flex: 33%">
+{% highlight C++ %}
 enum class Types
 {
 	Bool,
@@ -41,15 +45,19 @@ enum class Types
 	String,
 	Pointer
 };
-```
-Thus, a data type that can be any of these would be comprised of this union and an enum keeping track of which type is currently stored:
-```c++
+{% endhighlight %}
+</div>
+
+<div class="column" style="flex: 33%">
+{% highlight C++ %}
 class Variant
 {
 	Union value;
 	Type type;
 };
-```
+{% endhighlight %}
+</div>
+</div>
 
 That's the basics, but there's some serious headaches with how this would be fully implemented. Let's start with the first question you might be asking: How do you get a value out of this class? The most naive approach would be to have a method like the following:
 ```c++
