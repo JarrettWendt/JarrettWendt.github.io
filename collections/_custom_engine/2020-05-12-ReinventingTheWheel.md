@@ -102,7 +102,7 @@ I believe that libraries should convenience themselves to the users as much as p
 
 Unreal's `TArray` provides a `Remove` method, and so does my `Array`.
 
-Returning to the topic of allocators, there are some severe annoyances that users might have run into with using mixed allocators. If you have a `std::vector<int, std::allocator<int>>` and a `std::vector<int, MyAllocator<int>>` these are _two different types_ and the _compiler will treat them as such_. Which means that there is no `operator==` between them. Even though they both contain ints, just because those ints might have been allocated differently there's no way to compare them. The user is forced to use `std::equal(v1.begin(), v1.end(), v2.begin(), v2.end())`.
+Returning to the topic of allocators, there are some severe annoyances that users might have run into with using mixed allocators. If you have a `std::vector<int, std::allocator<int>>` and a `std::vector<int, MyAllocator<int>>` these are _two different types_ and the _compiler will treat them as such_. Which means that there is no `operator==` between them (at least until C++17 when `polymorphic_allocator`s were made standard for stl containers). Even though they both contain ints, just because those ints might have been allocated differently there's no way to compare them. The user is forced to use `std::equal(v1.begin(), v1.end(), v2.begin(), v2.end())`.
 
 Even though my containers don't use allocators, I'm in the same conundrum. I instead have reserve strategies for my `Array` and this problem can persist for the `KeyEqual` and `Hash` functors of `std::unordered_map`/`HashMap`. But it doesn't have to be this way. I've provided a _templated_ `operator==` so two `Array`s with different reserve strategies:
 
