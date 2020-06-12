@@ -23,7 +23,7 @@ So why doesn't anyone use it?
 
 &nbsp;
 
-I may not have any industry experience myself yet, but from talking with industry professionals, it seems that basically nobody uses stl. Just look at Unreal Engine. They've got `TArray` instead of `std::vector`, `TMap` instead of `std::map`, `FString` instead of `std::string`... all of these accomplish the same thing, and in many respects (such as how you cannot have a `TArray` of `TArrays`) they're not even as capable as their stl equivalents! So why did Epic reinvent the wheel?
+From talking with the industry professionals I know, it seems that basically nobody uses stl. Just look at Unreal Engine. They've got `TArray` instead of `std::vector`, `TMap` instead of `std::map`, `FString` instead of `std::string`... all of these accomplish the same thing, and in many respects (such as how you cannot have a `TArray` of `TArrays`) they're not even as capable as their stl equivalents! So why did Epic reinvent the wheel?
 
 I've just finished reimplementing three containers from the stl:
 - `std::vector` - my version is called `Array` to differentiate between vector the container and vector the mathematical concept.
@@ -160,5 +160,3 @@ But there's more to this than just the gratification of doing it yourself. There
 --------------------------------
 
 But does all of the above really warrant "reinventing the wheel"? In my opinion, for the vast majority of use cases, no. The stl was developed as a performant general-use library and they've achieved exactly that. It's got some very strange... C++isms that make it uncomfortable to approach for newcomers, but once you learn the ropes it's not that bad. Whatever benefits you might get from reimplementing the standard library are likely going to be outweighed by the _deep_ time sink of doing so. When you get down to it, time - _human_ work time not _runtime_ - might be the most important factor to consider. A large company who takes on a lot of inexperienced employees might earn back that time spent if their custom library is more programmer friendly and those new hires can learn more easily and become productive quicker.
-
-Then again, I'm pretty inexperienced myself, so forget everything I just said.
