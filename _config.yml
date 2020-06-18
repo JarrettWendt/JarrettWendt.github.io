@@ -1,6 +1,6 @@
 title: Jarrett Wendt
-iconURL: assets/default-icon.png
-404iconURL: assets/404-icon.png
+iconURL: /assets/default-icon.png
+404iconURL: /assets/404-icon.png
 
 markdown: kramdown
 
@@ -9,7 +9,7 @@ future: true
 # for a clean URL
 permalink: :slug
 
-resume: assets/resume.pdf
+resume: /assets/resume.pdf
 repo: https://github.com/JarrettWendt/FIEAEngine
 
 social:

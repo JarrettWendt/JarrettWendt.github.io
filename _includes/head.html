@@ -8,4 +8,14 @@
 	{%- if jekyll.environment == 'production' and site.google_analytics -%}
 		{%- include google-analytics.html -%}
 	{%- endif -%}
+
+	{% assign faviconPath = "/assets/favicon/" %}
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ faviconPath }}/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ faviconPath }}/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ faviconPath }}/favicon-16x16.png">
+	<link rel="manifest" href="{{ faviconPath }}/site.webmanifest">
+	<link rel="shortcut icon" href="{{ faviconPath }}/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="{{ faviconPath }}/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
 </head>
