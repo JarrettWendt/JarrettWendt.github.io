@@ -210,7 +210,7 @@ namespace py
 
 The changes here are small and purely semantic, but they make me happy.
 
-Another tricky aspect of the Python C API is reference counting. Python allocates all variables on the heap with reference counters. Yep, even if you declare an `int`, that exists on the heap, not the stack, and there's also a reference counter to go along with it.
+Another tricky aspect of the Python C API is reference counting. Python allocates all variables on the heap with reference counters. Yes, even if you declare a simple `int`, it will always exists on the heap, not the stack, and there's also a reference counter to go along with it.
 
 In the Python C API, you're expected to manage the reference counts yourself with `Py_INCREF` and `Py_DECREF` macros. It's important you do so precisely and correctly or else you could cause a dangling reference to never be deallocated or a reference to be destructed prematurely.
 
