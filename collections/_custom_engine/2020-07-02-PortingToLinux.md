@@ -1,10 +1,17 @@
 ---
 title: Porting to Linux
 author: Jarrett Wendt
+excerpt: '&nbsp;'
 sourceRepo: https://github.com/JarrettWendt/FIEAEngine
+thumb: assets/images/LinuxLogo.png
 layout: post
 cwd: '../'
 ---
+
+<figure>
+<img src="{{ page.cwd }}{{ page.thumb }}" alt="WargamesTicTacToe" width="500" style="display: block; margin-left: auto; margin-right: auto;">
+<figcaption>Linux Logo by <a href="https://www.reddit.com/r/linux/comments/gwegv5/linux_doesnt_have_a_logo_heres_how_id_do_it/" target="_blank">u/TypicalCitrus</a></figcaption>
+</figure>
 
 Up until now, my engine has only been working on Windows. However I don't have any major Windows-only dependencies such as DirectX. The only reasons it's been Windows-only up until now is because I've been using Microsoft-specific tools, namely Visual Studio, MSBuild, MSVC, and Microsoft's C++ Unit Testing Framework. Supporting Linux would at the very least require a compiler switch, which is a tall order considering how heavily my engine relies on still experimental C++20 features.
 
