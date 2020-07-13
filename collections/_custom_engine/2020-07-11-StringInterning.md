@@ -186,7 +186,7 @@ Otherwise, I'm extremely happy with how this turned out. The overhead per-string
 - A reference count per-string
 - A `std::unordered_set` node per-string
 - An $$ O(k) $$ where $$ k $$ is the length of the string hash computation on initial construction.
-- An $$ O(log(n)) $$ `std::unordered_set` insertion on initial construction.
+- A `std::unordered_set` insertion on initial construction.
 
 Which I believe is minimal compared to the benefits:
 - $$ O(1) $$ copies.
