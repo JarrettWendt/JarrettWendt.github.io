@@ -176,7 +176,7 @@ for (int i = 0; i < 100; i++)
 	std::cout << "hello, world!"_s << std::endl;
 }
 ```
-This code will create, destroy, hash, and do a $$O(log(n))$$ set insertion 100 times. Meanwhile if this were a `std::string` or even a `const char*` then it would have been calculated once by the compiler and likely even compile-time interned.
+This code will create, destroy, hash, and do a set insertion 100 times. Meanwhile if this were a `std::string` or even a `const char*` then it would have been calculated once by the compiler and likely even compile-time interned.
 
 The benefit of my implementation is run-time interning and $$O(1)$$ (as opposed to `std::string`'s $$O(n)$$ deep copy). Ideally, I'd like to come up with some sort of implementation that combines the benefits of `std::string`'s `constexpr` interning for literals and my run-time interning.
 
@@ -184,9 +184,9 @@ If you've read any of my <a href="{{ vvv.url }}" target="_blank">previous</a> <a
 
 Otherwise, I'm extremely happy with how this turned out. The overhead per-string is minimal:
 - A reference count per-string
-- A `std::unordered_map` node per-string
+- A `std::unordered_set` node per-string
 - An $$ O(k) $$ where $$ k $$ is the length of the string hash computation on initial construction.
-- An $$ O(log(n)) $$ `std::unordered_map` insertion on initial construction.
+- An $$ O(log(n)) $$ `std::unordered_set` insertion on initial construction.
 
 Which I believe is minimal compared to the benefits:
 - $$ O(1) $$ copies.
