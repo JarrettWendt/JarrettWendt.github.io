@@ -9,6 +9,14 @@ cwd: '../'
 
 > Insert blerb about how all programs need to be multithreaded now, the slowdown of Moore's Law, all the cores on Ryzen CPUs, etc.
 
+Despite that blerb, there's something I want to make abundantly clear before continuing:
+<div style="text-align:center;">
+<b>Coroutines are <u>NOT</u> multithreading!</b>
+</div>
+<br/>
+
+Coroutines are a way to break up your code in a piecewise manner. Do some of the calculation now and some later. It certainly _feels_ like multithreading and indeed there's no reason you can't run a coroutine on another thread (which I'll get into). However, coroutines are not inherently a multithreading task. With that out of the way, let's look at some examples.
+
 Unity provides a really convenient way to add asynchronous logic into your code:
 ```c#
 using UnityEngine;
@@ -49,9 +57,9 @@ public class ExampleClass : MonoBehaviour
 ```
 Unfortunately, you can't pass a lambda into `StartCoroutine()`.
 
-To be clear, this isn't _truly_ asynchronous. All of Unity's coroutines run synchronously, just like `Start()` and `Update()` methods. So coroutines won't help you improve performance through threading, but they are useful for breaking up your code to be _logically_ asynchronous. Good for when you need something to run $n$ seconds from now, or every $n$ seconds.
+To be clear, this isn't _truly_ asynchronous. All of Unity's coroutines run synchronously, just like `Start()` and `Update()` methods. So coroutines won't help you improve performance through threading, but they are useful for breaking up your code to be _logically_ asynchronous. Good for when you need something to run $$n$$ seconds from now, or every $$n$$ seconds.
 
-The alternative in Unreal is to use their Timers. Its much less expressive but provides much more control:
+The alternative in Unreal is to use their Timers. Its much less expressive but provides a bit more control:
 ```c++
 void AMyActor::BeginPlay()
 {
