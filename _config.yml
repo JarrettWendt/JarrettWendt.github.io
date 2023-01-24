@@ -13,8 +13,9 @@ resume: /assets/resume.pdf
 repo: https://github.com/JarrettWendt/FIEAEngine
 
 social:
-  github: JarrettWendt
   email: wendtjarrett@gmail.com
+  linkedin: https://linkedin.com/in/jarrett-wendt
+  github: https://github.com/JarrettWendt
 
 plugins:
  - jekyll-feed

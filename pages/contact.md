@@ -11,6 +11,11 @@ Email me at
 </a>
 
 See what I'm contributing on 
-<a target="_blank" href="https://github.com/{{ site.social.github }}">
+<a target="_blank" href="{{ site.social.github }}">
 GitHub
+</a>
+
+Add me on 
+<a target="_blank" href="{{ site.social.linkedin }}">
+LinkedIn
 </a>
