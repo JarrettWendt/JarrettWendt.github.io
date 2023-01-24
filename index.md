@@ -13,9 +13,13 @@ layout: page
 
 <p align="left">
 Nerd who likes to spend his free time optimizing his old code.
+</p>
 
+<p align="left">
 Graduated from the University of Central Florida in Spring 2019 with a B.S. in Computer Science.
+</p>
 
+<p align="left">
 Graduated from the Florida Interactive Entertainment Academy in Fall 2020 with an M.S. in Interactive Entertainment.
 </p>
 
