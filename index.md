@@ -11,11 +11,13 @@ layout: page
 
 <img src="assets/hacker_me.png" alt="I just want to code" width="74%" style="display: block; margin-left: auto; margin-right: 0;">
 
+<p align="left">
 Nerd who likes to spend his free time optimizing his old code.
 
 Graduated from the University of Central Florida in Spring 2019 with a B.S. in Computer Science.
 
 Graduated from the Florida Interactive Entertainment Academy in Fall 2020 with an M.S. in Interactive Entertainment.
+</p>
 
 <sub><sub>
 [Leaf Theme](https://github.com/SupunKavinda/jekyll-theme-leaf) by [Supun Kavinda](https://twitter.com/_SupunKavinda).
